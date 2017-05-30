@@ -1,11 +1,11 @@
 'use strict';
 var http = require("https");
 
-const CIRCLE_CI_API_TOKEN = "< YOUR CIRCLE CI TOKEN GOES HERE GOTO https://circleci.com/account/api >";
+const CIRCLE_CI_API_TOKEN = process.env.CIRCLECI_TOKEN;
 //VCS_TYPE value can be github or bitbucket
 const VCS_TYPE = "github";
-const CIRCLE_CI_USER = 'YOUR CIRCLE_CI USER NAME GOES HERE';
-const CIRCLE_CI_PROJECT_NAME = 'YOUR CIRCLE_CI PROJECT NAME GOES HERE';
+const CIRCLE_CI_USER = 'forestryio';
+const CIRCLE_CI_PROJECT_NAME = 'docker';
 const TOKEN_MSG = 'ERROR: you need to replace line 5 with your own token see: https://circleci.com/account/api ';
 
 module.exports.hello = (event, context, callback) => {
@@ -41,7 +41,7 @@ module.exports.hello = (event, context, callback) => {
             });
         });
 
-        req.write(JSON.stringify({RUN_EXTRA_TESTS: 'true'}));
+        req.write(JSON.stringify({BUILD_HUGO: 'true', BUILD_JEKYLL: 'true'}));
         req.end();
     }
 };
